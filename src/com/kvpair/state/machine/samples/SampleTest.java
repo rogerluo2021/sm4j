@@ -33,12 +33,12 @@ public class SampleTest {
         /**
          * Initializes a state transfer matrix
          */
-        byte[][] matrix = new byte[states.length][states.length];
-        matrix[0][1] = 1;
-        matrix[1][2] = 1;
-        matrix[1][3] = 1;
-        matrix[1][4] = 1;
-        matrix[2][1] = 1;
+        byte[][] stateTransferMatrix = new byte[states.length][states.length];
+        stateTransferMatrix[0][1] = 1;
+        stateTransferMatrix[1][2] = 1;
+        stateTransferMatrix[1][3] = 1;
+        stateTransferMatrix[1][4] = 1;
+        stateTransferMatrix[2][1] = 1;
 
         /**
          * Initializes the state transition instances
@@ -54,7 +54,7 @@ public class SampleTest {
          * Initializes a state machine
          */
         StateMachine stateMachine = new StateMachine.Builder()
-                .stateTransferMatrix(matrix)
+                .stateTransferMatrix(stateTransferMatrix)
                 .stateVector(stateVector)
                 .stateTransitions(stateTransitions)
                 .build();

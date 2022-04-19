@@ -12,9 +12,6 @@ public class StateTransitionDefinition {
     private Map<State, Integer> stateIndexes;
     private byte[][] matrix;
 
-    public StateTransitionDefinition() {
-    }
-
     public StateTransitionDefinition(Vector<State> states, byte[][] matrix) {
         stateIndexes = new HashMap<>();
         for (int i = 0; i < states.size(); i++) {
