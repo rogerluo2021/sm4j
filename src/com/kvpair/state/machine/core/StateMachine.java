@@ -13,11 +13,11 @@ import java.util.stream.Collectors;
 public class StateMachine {
 
     private Map<String, StateTransition> transitionMapping;
-    private StateTransitionDefinition stateTransitionDefinition;
+    private StateTransferDefinition stateTransferDefinition;
 
-    private StateMachine(Map<String, StateTransition> transitionMapping, StateTransitionDefinition stateTransitionDefinition) {
+    private StateMachine(Map<String, StateTransition> transitionMapping, StateTransferDefinition stateTransferDefinition) {
         this.transitionMapping = transitionMapping;
-        this.stateTransitionDefinition = stateTransitionDefinition;
+        this.stateTransferDefinition = stateTransferDefinition;
     }
 
     public <T, R> R start(T context, State preState, State nextState) {
@@ -31,7 +31,7 @@ public class StateMachine {
         if (stateTransition == null) {
             throw new IllegalArgumentException(String.format("can't find the matched state transition instance with the pre state '%s' and the next '%s'", preState, nextState));
         }
-        boolean canTransfer = stateTransitionDefinition.canTransfer(preState, nextState);
+        boolean canTransfer = stateTransferDefinition.canTransfer(preState, nextState);
         if (!canTransfer) {
             throw new IllegalArgumentException(String.format("can't transfer from '%s' to '%s'", preState, nextState));
         }
@@ -73,9 +73,9 @@ public class StateMachine {
 
         public StateMachine build() {
             checkParameters();
-            StateTransitionDefinition stateTransitionDefinition = new StateTransitionDefinition(stateVector, stateTransferMatrix);
+            StateTransferDefinition stateTransferDefinition = new StateTransferDefinition(stateVector, stateTransferMatrix);
             Map<String, StateTransition> transitionMapping = stateTransitions.stream().collect(Collectors.toMap(StateTransition::getKey, Function.identity()));
-            return new StateMachine(transitionMapping, stateTransitionDefinition);
+            return new StateMachine(transitionMapping, stateTransferDefinition);
         }
 
         private void checkParameters() {
