@@ -1,22 +1,29 @@
 package com.kvpair.state.machine.samples.transition;
 
-import com.kvpair.state.machine.core.AbstractStateTransition;
 import com.kvpair.state.machine.core.State;
+import com.kvpair.state.machine.core.StateTransition;
 import com.kvpair.state.machine.samples.Apply;
+import com.kvpair.state.machine.samples.ApplyState;
 
 /**
  * @author Houfeng Luo
  * @since 1.0.0
  */
-public class ReSubmitAudit extends AbstractStateTransition<Apply, Long> {
+public class ReSubmitAudit implements StateTransition<Apply, Long> {
 
-    public ReSubmitAudit(State preState, State nextState) {
-        super(preState, nextState);
+    @Override
+    public State getPreState() {
+        return ApplyState.FALLBACK;
     }
 
     @Override
-    protected Long doIt(Apply context) {
-        System.out.println("[" + preState + "->" + nextState + "] ReSubmitAudit executing...");
+    public State getNextState() {
+        return ApplyState.TO_AUDIT;
+    }
+
+    @Override
+    public Long transfer(Apply context) {
+        System.out.println("[" + getPreState() + "->" + getNextState() + "] ReSubmitAudit...");
         return null;
     }
 

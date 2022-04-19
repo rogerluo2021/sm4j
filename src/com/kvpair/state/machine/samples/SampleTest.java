@@ -44,11 +44,11 @@ public class SampleTest {
          * Initializes the state transition instances
          */
         List<StateTransition> stateTransitions = new ArrayList<>();
-        stateTransitions.add(new SubmitAudit(ApplyState.UN_COMMIT, ApplyState.TO_AUDIT));
-        stateTransitions.add(new ApplyFallback(ApplyState.TO_AUDIT, ApplyState.FALLBACK));
-        stateTransitions.add(new RejectApply(ApplyState.TO_AUDIT, ApplyState.REJECTED));
-        stateTransitions.add(new ApplyPassed(ApplyState.TO_AUDIT, ApplyState.PASSED));
-        stateTransitions.add(new ReSubmitAudit(ApplyState.FALLBACK, ApplyState.TO_AUDIT));
+        stateTransitions.add(new SubmitAudit());
+        stateTransitions.add(new ApplyFallback());
+        stateTransitions.add(new RejectApply());
+        stateTransitions.add(new ApplyPassed());
+        stateTransitions.add(new ReSubmitAudit());
 
         /**
          * Initializes a state machine

@@ -7,9 +7,21 @@ package com.kvpair.state.machine.core;
 public interface StateTransition<T, R> {
 
     /**
+     * Gets the previous state
+     */
+    State getPreState();
+
+    /**
+     * Gets the next state
+     */
+    State getNextState();
+
+    /**
      * Gets the key of the state transition
      */
-    String getKey();
+    default String getKey() {
+        return StateMachine.buildStateTransferRelationshipKey(getPreState(), getNextState());
+    }
 
     /**
      * Do the transition and return the result of the transition
@@ -17,13 +29,18 @@ public interface StateTransition<T, R> {
     R transfer(T context);
 
     /**
-     * Do something before the state transition, do nothing by default
+     * If you wanna do anything before the state transition,
+     * you can override the mehtod, for example,you can check any other preconditions in it,
+     * do nothing by default
      */
     default void before(T context) {
     }
 
     /**
-     * Do something after the state transition, do nothing by default
+     * If you wanna do anything after the state transition,
+     * you can override the mehtod, for example,
+     * you can logging it or notify other components who care the state transition, etc
+     * do nothing by default
      */
     default void after(T context, R transitionResult) {
     }

@@ -20,7 +20,7 @@ public class StateMachine {
         this.stateTransitionDefinition = stateTransitionDefinition;
     }
 
-    public <T, R> R start(T stateTransitionContext, State preState, State nextState) {
+    public <T, R> R start(T context, State preState, State nextState) {
         if (preState == null || preState.getValue() == null) {
             throw new IllegalArgumentException("Neither the pre state and the value of the pre state should be null");
         }
@@ -35,10 +35,12 @@ public class StateMachine {
         if (!canTransfer) {
             throw new IllegalArgumentException(String.format("can't transfer from '%s' to '%s'", preState, nextState));
         }
-        stateTransition.before(stateTransitionContext);
+
         R result;
-        result = stateTransition.transfer(stateTransitionContext);
-        stateTransition.after(stateTransitionContext, result);
+        stateTransition.before(context);
+        result = stateTransition.transfer(context);
+        stateTransition.after(context, result);
+
         return result;
     }
 

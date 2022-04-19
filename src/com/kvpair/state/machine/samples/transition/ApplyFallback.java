@@ -1,22 +1,29 @@
 package com.kvpair.state.machine.samples.transition;
 
-import com.kvpair.state.machine.core.AbstractStateTransition;
 import com.kvpair.state.machine.core.State;
+import com.kvpair.state.machine.core.StateTransition;
 import com.kvpair.state.machine.samples.Apply;
+import com.kvpair.state.machine.samples.ApplyState;
 
 /**
  * @author Houfeng Luo
  * @since 1.0.0
  */
-public class ApplyFallback extends AbstractStateTransition<Apply, Long> {
+public class ApplyFallback implements StateTransition<Apply, Long> {
 
-    public ApplyFallback(State preState, State nextState) {
-        super(preState, nextState);
+    @Override
+    public Long transfer(Apply context) {
+        System.out.println("[" + getPreState() + "->" + getNextState() + "] ApplyFallback...");
+        return null;
     }
 
     @Override
-    protected Long doIt(Apply context) {
-        System.out.println("["+preState + "->"+ nextState + "] ApplyFallback executing...");
-        return null;
+    public State getPreState() {
+        return ApplyState.TO_AUDIT;
+    }
+
+    @Override
+    public State getNextState() {
+        return ApplyState.FALLBACK;
     }
 }
