@@ -2,8 +2,8 @@ package com.kvpair.state.machine.samples;
 
 import com.kvpair.state.machine.core.State;
 import com.kvpair.state.machine.core.StateMachine;
-import com.kvpair.state.machine.core.StateTransferHandler;
-import com.kvpair.state.machine.samples.handler.*;
+import com.kvpair.state.machine.core.StateTransition;
+import com.kvpair.state.machine.samples.transition.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,15 +25,15 @@ public class SampleTest {
      */
     public static void main(String[] args) {
         /**
-         * Initializes the state vector
+         * Initializes a state vector
          */
-        ApplyState[] arr = {ApplyState.UN_COMMIT, ApplyState.TO_AUDIT, ApplyState.FALLBACK, ApplyState.REJECTED, ApplyState.PASSED};
-        Vector<State> stateVector = new Vector<>(Arrays.asList(arr));
+        ApplyState[] states = {ApplyState.UN_COMMIT, ApplyState.TO_AUDIT, ApplyState.FALLBACK, ApplyState.REJECTED, ApplyState.PASSED};
+        Vector<State> stateVector = new Vector<>(Arrays.asList(states));
 
         /**
-         * Initializes the state transfer matrix
+         * Initializes a state transfer matrix
          */
-        byte[][] matrix = new byte[arr.length][arr.length];
+        byte[][] matrix = new byte[states.length][states.length];
         matrix[0][1] = 1;
         matrix[1][2] = 1;
         matrix[1][3] = 1;
@@ -41,22 +41,22 @@ public class SampleTest {
         matrix[2][1] = 1;
 
         /**
-         * Initializes the state transfer handlers
+         * Initializes the state transition instances
          */
-        List<StateTransferHandler> stateTransferHandlers = new ArrayList<>();
-        stateTransferHandlers.add(new SubmitAuditHandler(ApplyState.UN_COMMIT, ApplyState.TO_AUDIT));
-        stateTransferHandlers.add(new ApplyFallbackHandler(ApplyState.TO_AUDIT, ApplyState.FALLBACK));
-        stateTransferHandlers.add(new RejectApplyHandler(ApplyState.TO_AUDIT, ApplyState.REJECTED));
-        stateTransferHandlers.add(new ApplyPassedHandler(ApplyState.TO_AUDIT, ApplyState.PASSED));
-        stateTransferHandlers.add(new ReSubmitAuditHandler(ApplyState.FALLBACK, ApplyState.TO_AUDIT));
+        List<StateTransition> stateTransitions = new ArrayList<>();
+        stateTransitions.add(new SubmitAudit(ApplyState.UN_COMMIT, ApplyState.TO_AUDIT));
+        stateTransitions.add(new ApplyFallback(ApplyState.TO_AUDIT, ApplyState.FALLBACK));
+        stateTransitions.add(new RejectApply(ApplyState.TO_AUDIT, ApplyState.REJECTED));
+        stateTransitions.add(new ApplyPassed(ApplyState.TO_AUDIT, ApplyState.PASSED));
+        stateTransitions.add(new ReSubmitAudit(ApplyState.FALLBACK, ApplyState.TO_AUDIT));
 
         /**
-         * Initializes the state transfer handlers
+         * Initializes a state machine
          */
         StateMachine stateMachine = new StateMachine.Builder()
                 .stateTransferMatrix(matrix)
                 .stateVector(stateVector)
-                .stateTransferHandlers(stateTransferHandlers)
+                .stateTransferHandlers(stateTransitions)
                 .build();
 
         /**
