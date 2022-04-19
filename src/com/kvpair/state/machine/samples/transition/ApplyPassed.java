@@ -16,17 +16,17 @@ public class ApplyPassed extends AbstractStateTransition<OtherTypeInput, Void> {
 
     @Override
     public void before(OtherTypeInput context) {
-        System.out.println("before ApplyPassedHandler executing...");
+        System.out.println("before ApplyFallback executing...");
     }
 
     @Override
     public void after(OtherTypeInput context, Void transitionResult) {
-        System.out.println("after ApplyPassedHandler executing...");
+        System.out.println("after ApplyFallback executed...");
     }
 
     @Override
     protected Void doIt(OtherTypeInput context) {
-        System.out.println("[" + preState + "->" + nextState + "] ApplyPassedHandler executing...");
+        System.out.println("[" + preState + "->" + nextState + "] ApplyFallback executing...");
         return null;
     }
 

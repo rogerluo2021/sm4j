@@ -64,7 +64,7 @@ public class StateMachine {
             return this;
         }
 
-        public Builder stateTransferHandlers(List<StateTransition> stateTransitions) {
+        public Builder stateTransitions(List<StateTransition> stateTransitions) {
             this.stateTransitions = stateTransitions;
             return this;
         }

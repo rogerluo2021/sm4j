@@ -16,7 +16,7 @@ public class ReSubmitAudit extends AbstractStateTransition<Apply, Long> {
 
     @Override
     protected Long doIt(Apply context) {
-        System.out.println("[" + preState + "->" + nextState + "] ReSubmitAuditHandler executing...");
+        System.out.println("[" + preState + "->" + nextState + "] ReSubmitAudit executing...");
         return null;
     }
 

@@ -16,7 +16,7 @@ public class RejectApply extends AbstractStateTransition<Apply, Long> {
 
     @Override
     protected Long doIt(Apply context) {
-        System.out.println("[" + preState + "->" + nextState + "] RejectApplyHandler executing...");
+        System.out.println("[" + preState + "->" + nextState + "] RejectApply executing...");
         return null;
     }
 

@@ -16,7 +16,7 @@ public class ApplyFallback extends AbstractStateTransition<Apply, Long> {
 
     @Override
     protected Long doIt(Apply context) {
-        System.out.println("["+preState + "->"+ nextState + "] ApplyFallbackHandler executing...");
+        System.out.println("["+preState + "->"+ nextState + "] ApplyFallback executing...");
         return null;
     }
 }

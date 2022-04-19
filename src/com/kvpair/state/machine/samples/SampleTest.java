@@ -56,7 +56,7 @@ public class SampleTest {
         StateMachine stateMachine = new StateMachine.Builder()
                 .stateTransferMatrix(matrix)
                 .stateVector(stateVector)
-                .stateTransferHandlers(stateTransitions)
+                .stateTransitions(stateTransitions)
                 .build();
 
         /**
