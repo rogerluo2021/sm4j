@@ -10,12 +10,12 @@ import java.util.Vector;
  */
 public class StateTransferDefinition {
     private Map<State, Integer> stateIndexes;
-    private int[][] matrix;
+    private byte[][] matrix;
 
     public StateTransferDefinition() {
     }
 
-    public StateTransferDefinition(Vector<State> states, int[][] matrix) {
+    public StateTransferDefinition(Vector<State> states, byte[][] matrix) {
         stateIndexes = new HashMap<>();
         for (int i = 0; i < states.size(); i++) {
             stateIndexes.put(states.get(i), i);

@@ -33,7 +33,7 @@ public class SampleTest {
         /**
          * Initializes the state transfer matrix
          */
-        int[][] matrix = new int[arr.length][arr.length];
+        byte[][] matrix = new byte[arr.length][arr.length];
         matrix[0][1] = 1;
         matrix[1][2] = 1;
         matrix[1][3] = 1;

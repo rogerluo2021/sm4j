@@ -44,7 +44,7 @@ public class StateMachine {
 
     public static class Builder {
         private Vector<State> stateVector;
-        private int[][] stateTransferMatrix;
+        private byte[][] stateTransferMatrix;
         private List<StateTransferHandler> stateTransferHandlers;
 
         public Builder() {
@@ -55,7 +55,7 @@ public class StateMachine {
             return this;
         }
 
-        public Builder stateTransferMatrix(int[][] stateTransferMatrix) {
+        public Builder stateTransferMatrix(byte[][] stateTransferMatrix) {
             this.stateTransferMatrix = stateTransferMatrix;
             return this;
         }
@@ -95,7 +95,7 @@ public class StateMachine {
             }
         }
 
-        private int countStateTransferRelationship(int[][] stateTransferMatrix) {
+        private int countStateTransferRelationship(byte[][] stateTransferMatrix) {
             int stateTransferRelationshipCount = 0;
             for (int i = 0; i < stateTransferMatrix.length; i++) {
                 for (int j = 0; j < stateTransferMatrix[i].length; j++) {
