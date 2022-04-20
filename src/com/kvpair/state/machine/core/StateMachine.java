@@ -87,7 +87,7 @@ public class StateMachine {
                 int preStateIndex = stateTransferDefinition.getIndex(stateTransition.getPreState());
                 int nextStateIndex = stateTransferDefinition.getIndex(stateTransition.getNextState());
                 if (stateTransferMatrix[preStateIndex][nextStateIndex] != YES) {
-                    throw new IllegalArgumentException("can't find the state transition in the matrix");
+                    throw new IllegalArgumentException(String.format("can't find the state transition(%s -> %s) in the matrix", stateTransition.getPreState(), stateTransition.getNextState()));
                 }
             }
             return new StateMachine(transitionMapping, stateTransferDefinition);
