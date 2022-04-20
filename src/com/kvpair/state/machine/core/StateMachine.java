@@ -81,7 +81,7 @@ public class StateMachine {
             Map<String, StateTransition> transitionMapping = stateTransitions.stream().collect(Collectors.toMap(StateTransition::getKey, Function.identity()));
 
             /**
-             * check the position of the state transition instance in the matrix
+             * Finally, we need check the position of the state transition instance in the matrix once again
              */
             for (StateTransition stateTransition : stateTransitions) {
                 int preStateIndex = stateTransferDefinition.getIndex(stateTransition.getPreState());
