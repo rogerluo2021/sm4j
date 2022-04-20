@@ -24,7 +24,7 @@ public class SubmitAudit implements StateTransition<Apply, Long> {
     @Override
     public Long transfer(Apply context) {
         System.out.println("[" + getPreState() + "->" + getNextState() + "] SubmitAudit...");
-        return null;
+        return 1L;
     }
 
 }

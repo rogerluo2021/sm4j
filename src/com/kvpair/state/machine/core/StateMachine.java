@@ -22,7 +22,7 @@ public class StateMachine {
         this.stateTransferDefinition = stateTransferDefinition;
     }
 
-    public <T, R> R start(T context, State preState, State nextState) {
+    public <T, R> R doTransfer(T context, Class<R> returnType, State preState, State nextState) {
         if (preState == null || preState.getValue() == null) {
             throw new IllegalArgumentException("Neither the pre state and the value of the pre state should be null");
         }
@@ -41,6 +41,9 @@ public class StateMachine {
         R result;
         stateTransition.before(context);
         result = stateTransition.transfer(context);
+        if(result != null && !returnType.equals(result.getClass())) {
+            throw new IllegalArgumentException("return type not matched");
+        }
         stateTransition.after(context, result);
 
         return result;

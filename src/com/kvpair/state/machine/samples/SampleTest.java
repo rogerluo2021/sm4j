@@ -62,15 +62,16 @@ public class SampleTest {
         /**
          * the cases of the state transition success
          */
-        stateMachine.start(new Apply(), ApplyState.UN_COMMIT, ApplyState.TO_AUDIT);
-        stateMachine.start(new Apply(), ApplyState.TO_AUDIT, ApplyState.FALLBACK);
-        stateMachine.start(new Apply(), ApplyState.TO_AUDIT, ApplyState.REJECTED);
-        stateMachine.start(new OtherTypeInput(), ApplyState.TO_AUDIT, ApplyState.PASSED);
-        stateMachine.start(new Apply(), ApplyState.FALLBACK, ApplyState.TO_AUDIT);
+        Long result = stateMachine.doTransfer(new Apply(), Long.class, ApplyState.UN_COMMIT, ApplyState.TO_AUDIT);
+        System.out.println("result:"+result);
+        stateMachine.doTransfer(new Apply(), Long.class, ApplyState.TO_AUDIT, ApplyState.FALLBACK);
+        stateMachine.doTransfer(new Apply(), Long.class, ApplyState.TO_AUDIT, ApplyState.REJECTED);
+        stateMachine.doTransfer(new OtherTypeInput(), Void.class, ApplyState.TO_AUDIT, ApplyState.PASSED);
+        stateMachine.doTransfer(new Apply(), Long.class, ApplyState.FALLBACK, ApplyState.TO_AUDIT);
 
         /**
          * the case of the state transition failed
          */
-        stateMachine.start(null, ApplyState.PASSED, ApplyState.TO_AUDIT);
+        stateMachine.doTransfer(null, Long.class, ApplyState.PASSED, ApplyState.TO_AUDIT);
     }
 }
