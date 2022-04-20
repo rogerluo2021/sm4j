@@ -11,6 +11,7 @@ import java.util.Vector;
 public class StateTransferDefinition {
     private Map<State, Integer> stateIndexes;
     private byte[][] matrix;
+    private static final byte YES = 1;
 
     public StateTransferDefinition(Vector<State> states, byte[][] matrix) {
         stateIndexes = new HashMap<>();
@@ -23,7 +24,7 @@ public class StateTransferDefinition {
     public boolean canTransfer(State preState, State nextState) {
         int preIndex = stateIndexes.get(preState);
         int nextIndex = stateIndexes.get(nextState);
-        return matrix[preIndex][nextIndex] == 1;
+        return matrix[preIndex][nextIndex] == YES;
     }
 
 }
