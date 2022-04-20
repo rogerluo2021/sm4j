@@ -6,6 +6,8 @@ import java.util.Vector;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static com.kvpair.state.machine.core.StateTransferDefinition.YES;
+
 /**
  * @author Houfeng Luo
  * @since 1.0.0
@@ -72,9 +74,22 @@ public class StateMachine {
         }
 
         public StateMachine build() {
+
             checkParameters();
+
             StateTransferDefinition stateTransferDefinition = new StateTransferDefinition(stateVector, stateTransferMatrix);
             Map<String, StateTransition> transitionMapping = stateTransitions.stream().collect(Collectors.toMap(StateTransition::getKey, Function.identity()));
+
+            /**
+             * check the position of the state transition instance in the matrix
+             */
+            for (StateTransition stateTransition : stateTransitions) {
+                int preStateIndex = stateTransferDefinition.getIndex(stateTransition.getPreState());
+                int nextStateIndex = stateTransferDefinition.getIndex(stateTransition.getNextState());
+                if (stateTransferMatrix[preStateIndex][nextStateIndex] != YES) {
+                    throw new IllegalArgumentException("can't find the state transition in the matrix");
+                }
+            }
             return new StateMachine(transitionMapping, stateTransferDefinition);
         }
 
@@ -102,7 +117,7 @@ public class StateMachine {
             int stateTransitionCount = 0;
             for (int i = 0; i < stateTransferMatrix.length; i++) {
                 for (int j = 0; j < stateTransferMatrix[i].length; j++) {
-                    if (stateTransferMatrix[i][j] == StateTransferDefinition.YES) {
+                    if (stateTransferMatrix[i][j] == YES) {
                         stateTransitionCount++;
                     }
                 }

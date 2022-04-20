@@ -21,6 +21,10 @@ public class StateTransferDefinition {
         this.matrix = matrix;
     }
 
+    public int getIndex(State state) {
+        return stateIndexes.get(state);
+    }
+
     public boolean canTransfer(State preState, State nextState) {
         int preIndex = stateIndexes.get(preState);
         int nextIndex = stateIndexes.get(nextState);
