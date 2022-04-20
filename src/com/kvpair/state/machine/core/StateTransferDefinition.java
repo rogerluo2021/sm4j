@@ -11,7 +11,7 @@ import java.util.Vector;
 public class StateTransferDefinition {
     private Map<State, Integer> stateIndexes;
     private byte[][] matrix;
-    private static final byte YES = 1;
+    public static final byte YES = 1;
 
     public StateTransferDefinition(Vector<State> states, byte[][] matrix) {
         stateIndexes = new HashMap<>();

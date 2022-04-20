@@ -102,7 +102,7 @@ public class StateMachine {
             int stateTransitionCount = 0;
             for (int i = 0; i < stateTransferMatrix.length; i++) {
                 for (int j = 0; j < stateTransferMatrix[i].length; j++) {
-                    if (stateTransferMatrix[i][j] == 1) {
+                    if (stateTransferMatrix[i][j] == StateTransferDefinition.YES) {
                         stateTransitionCount++;
                     }
                 }
